@@ -1,0 +1,55 @@
+export type Role = 'student' | 'cashier';
+
+export type Category = 'all' | 'coffee' | 'food' | 'print' | 'coworking';
+
+export interface VenueOffer {
+  id: string;
+  name: string;
+  category: Category;
+  categoryLabel: string;
+  address: string;
+  distance: string;
+  cluster: string;
+  title: string;
+  description: string;
+  originalPrice: number;
+  discountedPrice: number;
+  discountPercent: number;
+  happyHoursActive: boolean;
+  happyHoursEnd: string; // e.g. "17:00"
+  remainingSeconds: number; // For live countdown
+  image: string;
+  iconName: string;
+  isControlledByCashier?: boolean; // URBO coffee
+}
+
+export interface StudentCode {
+  code: string;
+  venueId: string;
+  venueName: string;
+  discountPercent: number;
+  finalPrice: number;
+  originalPrice: number;
+  createdAt: number;
+  expiresInSeconds: number;
+  studentName: string;
+  studentUni: string;
+  isValid: boolean;
+}
+
+export interface RedemptionLog {
+  id: string;
+  code: string;
+  venueName: string;
+  studentUni: string;
+  amount: number;
+  savedAmount: number;
+  timestamp: string;
+}
+
+export interface B2BMetrics {
+  studentsToday: number;
+  additionalRevenue: number;
+  repeatConversionPercent: number;
+  currentCapacity: number; // e.g. 22%
+}
