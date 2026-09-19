@@ -19,14 +19,22 @@ import {
   Search,
   SlidersHorizontal,
   ArrowUpDown,
-  GraduationCap
+  GraduationCap,
+  Wrench,
+  Cake,
+  Globe,
+  ExternalLink,
+  Instagram,
+  Phone
 } from 'lucide-react';
 import { QrModal } from './QrModal';
 
 const CATEGORIES: { id: Category; label: string; icon: React.ReactNode }[] = [
   { id: 'all', label: 'Все категории', icon: <Layers className="w-3.5 h-3.5" /> },
-  { id: 'coffee', label: 'Кофе и десерты', icon: <Coffee className="w-3.5 h-3.5" /> },
-  { id: 'food', label: 'Обеды / Донеры', icon: <Utensils className="w-3.5 h-3.5" /> },
+  { id: 'service', label: 'Сервис и ПК', icon: <Wrench className="w-3.5 h-3.5" /> },
+  { id: 'dessert', label: 'Торты и десерты', icon: <Cake className="w-3.5 h-3.5" /> },
+  { id: 'coffee', label: 'Кофе и напитки', icon: <Coffee className="w-3.5 h-3.5" /> },
+  { id: 'food', label: 'Обеды / Еда', icon: <Utensils className="w-3.5 h-3.5" /> },
   { id: 'print', label: 'Копицентры', icon: <Printer className="w-3.5 h-3.5" /> },
   { id: 'coworking', label: 'Коворкинги', icon: <Laptop className="w-3.5 h-3.5" /> },
 ];
@@ -102,6 +110,10 @@ export const StudentView: React.FC = () => {
 
   const getCategoryIcon = (category: Category) => {
     switch (category) {
+      case 'service':
+        return <Wrench className="w-3.5 h-3.5 text-blue-600" />;
+      case 'dessert':
+        return <Cake className="w-3.5 h-3.5 text-pink-600" />;
       case 'coffee':
         return <Coffee className="w-3.5 h-3.5 text-amber-600" />;
       case 'food':
@@ -109,7 +121,7 @@ export const StudentView: React.FC = () => {
       case 'print':
         return <Printer className="w-3.5 h-3.5 text-indigo-600" />;
       case 'coworking':
-        return <Laptop className="w-3.5 h-3.5 text-blue-600" />;
+        return <Laptop className="w-3.5 h-3.5 text-cyan-600" />;
       default:
         return <Sparkles className="w-3.5 h-3.5 text-blue-600" />;
     }
@@ -271,13 +283,13 @@ export const StudentView: React.FC = () => {
       {/* 3. Cards Grid (3 columns on Laptop / Desktop like screenshot 2) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredOffers.map((offer: VenueOffer) => {
-          const isUrboDisabled = offer.id === 'urbo-coffee' && !offer.happyHoursActive;
+          const isDisabled = !offer.happyHoursActive;
 
           return (
             <div
               key={offer.id}
               className={`group bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col overflow-hidden ${
-                isUrboDisabled ? 'opacity-70 grayscale-[30%]' : ''
+                isDisabled ? 'opacity-70 grayscale-[30%]' : ''
               }`}
             >
               {/* Card Cover Image Header with Badges */}
@@ -285,6 +297,9 @@ export const StudentView: React.FC = () => {
                 <img
                   src={offer.image}
                   alt={offer.title}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = '/partners/torte-studio.jpg';
+                  }}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
@@ -350,15 +365,69 @@ export const StudentView: React.FC = () => {
                   </h3>
 
                   {/* Description Snippet */}
-                  <p className="text-xs text-slate-500 mt-1.5 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
                     {offer.description}
                   </p>
                   
-                  {/* Address */}
-                  <p className="text-[11px] text-slate-400 mt-2 flex items-center gap-1">
-                    <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
-                    <span className="truncate">{offer.address}</span>
-                  </p>
+                  {/* Address & Quick Links */}
+                  <div className="mt-2.5 space-y-1.5">
+                    <p className="text-[11px] text-slate-500 flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                      <span className="font-medium text-slate-700">{offer.address}</span>
+                    </p>
+
+                    {/* Interactive partner badges (website, yandex maps, instagram, phone) */}
+                    <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                      {offer.website && (
+                        <a
+                          href={offer.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[10px] font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 px-2 py-0.5 rounded-md border border-blue-200/80 transition"
+                        >
+                          <Globe className="w-2.5 h-2.5" />
+                          <span>{offer.website.replace('https://', '')}</span>
+                          <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+                        </a>
+                      )}
+
+                      {offer.mapUrl && (
+                        <a
+                          href={offer.mapUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2 py-0.5 rounded-md border border-emerald-200/80 transition"
+                        >
+                          <MapPin className="w-2.5 h-2.5" />
+                          <span>Яндекс Карты</span>
+                          <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+                        </a>
+                      )}
+
+                      {offer.instagram && (
+                        <a
+                          href={offer.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[10px] font-bold text-pink-700 bg-pink-50 hover:bg-pink-100 px-2 py-0.5 rounded-md border border-pink-200/80 transition"
+                        >
+                          <Instagram className="w-2.5 h-2.5" />
+                          <span>{offer.instagram.replace('https://instagram.com/', '@')}</span>
+                          <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+                        </a>
+                      )}
+
+                      {offer.phone && (
+                        <a
+                          href={`tel:${offer.phone.replace(/[^0-9+]/g, '')}`}
+                          className="inline-flex items-center gap-1 text-[10px] font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 px-2 py-0.5 rounded-md border border-slate-200 transition"
+                        >
+                          <Phone className="w-2.5 h-2.5 text-slate-500" />
+                          <span>{offer.phone}</span>
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Bottom Pricing & CTA Button */}

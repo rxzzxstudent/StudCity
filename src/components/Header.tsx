@@ -3,6 +3,7 @@
 import React from 'react';
 import { useApp } from '@/context/AppContext';
 import { GraduationCap, Store, Sparkles } from 'lucide-react';
+import { StudCityLogo } from './StudCityLogo';
 
 export const Header: React.FC = () => {
   const { 
@@ -18,14 +19,16 @@ export const Header: React.FC = () => {
         <div className="flex items-center justify-between h-14 sm:h-16 gap-1.5 sm:gap-4">
           
           {/* Logo & Brand */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-blue-500 to-sky-400 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
-            </div>
-            <span className="font-black text-base sm:text-xl tracking-tight text-slate-900">
-              Stud<span className="text-blue-600">City</span>
-            </span>
-          </div>
+          <button 
+            onClick={() => {
+              setRole('student');
+              setStudentTab('offers');
+            }}
+            title="StudCity — Главная"
+            className="flex items-center gap-2 shrink-0 group text-left focus:outline-hidden"
+          >
+            <StudCityLogo size="sm" layout="auto" animated={true} />
+          </button>
 
           {/* Student Sub-navigation: Offers vs Map */}
           {role === 'student' && (

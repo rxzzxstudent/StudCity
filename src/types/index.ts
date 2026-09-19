@@ -29,7 +29,7 @@ export interface MapSpot {
   isUserAdded?: boolean;
 }
 
-export type Category = 'all' | 'coffee' | 'food' | 'print' | 'coworking';
+export type Category = 'all' | 'coffee' | 'food' | 'dessert' | 'service' | 'print' | 'coworking';
 
 export interface VenueOffer {
   id: string;
@@ -50,6 +50,11 @@ export interface VenueOffer {
   image: string;
   iconName: string;
   isControlledByCashier?: boolean; // URBO coffee
+  website?: string;
+  mapUrl?: string;
+  phone?: string;
+  instagram?: string;
+  badge?: string;
 }
 
 export interface StudentCode {

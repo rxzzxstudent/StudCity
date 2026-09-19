@@ -6,7 +6,8 @@ import { Header } from '@/components/Header';
 import { StudentView } from '@/components/student/StudentView';
 import { CashierView } from '@/components/cashier/CashierView';
 import { UnifiedCityMap } from '@/components/map/UnifiedCityMap';
-import { Sparkles, Heart } from 'lucide-react';
+import { StudCityLogo } from '@/components/StudCityLogo';
+import { Heart } from 'lucide-react';
 
 function AppContent() {
   const { role, studentTab } = useApp();
@@ -25,9 +26,9 @@ function AppContent() {
 
       <footer className="py-6 border-t border-slate-200/80 bg-white text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5 font-semibold text-slate-700">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            <span>StudCity MVP • Хакатон</span>
+          <div className="flex items-center gap-2 font-semibold text-slate-700">
+            <StudCityLogo size="xs" layout="horizontal" animated={false} />
+            <span className="text-slate-400 font-normal">• Хакатон</span>
           </div>
           <p className="text-slate-400">
             Студенческий Yield Management & Счастливые часы для Алматы

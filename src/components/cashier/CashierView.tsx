@@ -94,10 +94,10 @@ export const CashierView: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-                  URBO Coffee
+                  Coffee Moon — Cafe & Wine
                 </h1>
                 <span className="bg-slate-100 text-slate-600 text-xs font-semibold px-2 py-0.5 rounded-lg">
-                  Касса №1 • Байтурсынова 100
+                  Касса №1 • Манаса, 51
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-blue-600 font-semibold mt-0.5">

@@ -3,7 +3,8 @@
 import React from 'react';
 import { useApp } from '@/context/AppContext';
 import { QRCodeSVG } from 'qrcode.react';
-import { X, Clock, RefreshCw, CheckCircle2, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { X, Clock, RefreshCw, CheckCircle2, ArrowRight, ShieldCheck, Sparkles, MapPin } from 'lucide-react';
+import { StudCityLogo } from '../StudCityLogo';
 
 export const QrModal: React.FC = () => {
   const {
@@ -40,9 +41,10 @@ export const QrModal: React.FC = () => {
             <X className="w-5 h-5" />
           </button>
 
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-2">
+            <StudCityLogo size="xs" textColor="white" layout="horizontal" animated={false} />
             <span className="bg-white/20 text-white text-[11px] font-semibold px-2 py-0.5 rounded-full backdrop-blur-xs">
-              Студенческий QR-купон
+              QR-купон
             </span>
           </div>
           <h3 className="text-xl font-bold">{activeOfferForQr.name}</h3>
@@ -128,10 +130,38 @@ export const QrModal: React.FC = () => {
             Покажите этот экран кассиру <span className="font-semibold text-slate-800">до {activeOfferForQr.happyHoursEnd}</span> для применения скидки.
           </p>
 
+          {/* Venue Location & Link */}
+          <div className="mt-2.5 p-2.5 bg-slate-50 rounded-xl border border-slate-100 text-left flex items-center justify-between gap-2">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <MapPin className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+              <span className="text-[11px] text-slate-600 truncate">{activeOfferForQr.address}</span>
+            </div>
+            {activeOfferForQr.mapUrl && (
+              <a
+                href={activeOfferForQr.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] font-bold text-blue-600 hover:text-blue-800 shrink-0 underline"
+              >
+                Карта
+              </a>
+            )}
+            {activeOfferForQr.website && (
+              <a
+                href={activeOfferForQr.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] font-bold text-blue-600 hover:text-blue-800 shrink-0 underline"
+              >
+                Сайт
+              </a>
+            )}
+          </div>
+
           {/* Student details verified */}
           <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-center gap-1.5 text-[11px] text-emerald-600 font-medium">
             <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>Студенческий ID подтвержден</span>
+            <span>Студенческий ID подтвержден (КазНУ / Polytech)</span>
           </div>
 
           {/* Quick Demo Action to Jump to Cashier */}

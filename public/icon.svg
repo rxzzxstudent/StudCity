@@ -1,0 +1,39 @@
+<svg width="512" height="512" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="studCityIconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#38BDF8" />
+      <stop offset="35%" stopColor="#2563EB" />
+      <stop offset="100%" stopColor="#1D4ED8" />
+    </linearGradient>
+    <linearGradient id="studCityGlossGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#ffffff" stopOpacity="0.3" />
+      <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Squircle -->
+  <rect x="2" y="2" width="96" height="96" rx="25" fill="url(#studCityIconGrad)" />
+  <rect x="2" y="2" width="96" height="48" rx="25" fill="url(#studCityGlossGrad)" />
+
+  <!-- Map Panels -->
+  <path d="M17 68 L32 46 L45 54 L45 72 L31 64 Z" fill="none" stroke="#FFFFFF" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M55 72 L55 54 L68 46 L83 68 L69 75 Z" fill="none" stroke="#FFFFFF" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M45 72 L55 72" stroke="#FFFFFF" stroke-width="4.8" stroke-linecap="round" />
+
+  <!-- City Skyline -->
+  <g fill="#FFFFFF">
+    <rect x="54" y="61" width="6.5" height="15" rx="1.2" />
+    <rect x="62" y="53" width="8" height="23" rx="1.2" />
+    <rect x="71.5" y="63" width="6.5" height="13" rx="1.2" />
+    <rect x="64.2" y="56.5" width="1.5" height="1.8" rx="0.3" fill="#2563EB" />
+    <rect x="67" y="56.5" width="1.5" height="1.8" rx="0.3" fill="#2563EB" />
+    <rect x="64.2" y="60.5" width="1.5" height="1.8" rx="0.3" fill="#2563EB" />
+    <rect x="67" y="60.5" width="1.5" height="1.8" rx="0.3" fill="#2563EB" />
+    <rect x="64.2" y="64.5" width="1.5" height="1.8" rx="0.3" fill="#2563EB" />
+    <rect x="67" y="64.5" width="1.5" height="1.8" rx="0.3" fill="#2563EB" />
+  </g>
+
+  <!-- Map Pin -->
+  <path d="M50 20 C39 20 30 29 30 40 C30 53.5 48 69.5 50 71 C52 69.5 70 53.5 70 40 C70 29 61 20 50 20 Z" fill="#FFFFFF" />
+  <circle cx="50" cy="39" r="6" fill="#2563EB" />
+</svg>

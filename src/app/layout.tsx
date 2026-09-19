@@ -10,6 +10,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'StudCity — Студенческие Счастливые Часы & Yield Management',
   description: 'MVP веб-сервиса для студентов и локальных заведений Алматы: динамические скидки во время спада трафика.',
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
 };
 
 export const viewport: Viewport = {
