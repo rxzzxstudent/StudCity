@@ -22,62 +22,50 @@ const getCategoryConfig = (cat: MapSpotCategory) => {
     case 'toilet':
       return {
         bg: 'bg-blue-600',
-        border: 'border-blue-300',
-        shadow: 'shadow-blue-500/40',
         emoji: '🚽',
         label: 'Туалет',
         textColor: 'text-blue-600',
-        badgeBg: 'bg-blue-50 text-blue-700 border-blue-200',
+        badgeBg: 'bg-blue-50 text-blue-700 border-blue-100',
       };
     case 'wifi':
       return {
         bg: 'bg-emerald-600',
-        border: 'border-emerald-300',
-        shadow: 'shadow-emerald-500/40',
         emoji: '📶',
         label: 'Wi-Fi',
         textColor: 'text-emerald-600',
-        badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+        badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-100',
       };
     case 'outlet':
       return {
         bg: 'bg-purple-600',
-        border: 'border-purple-300',
-        shadow: 'shadow-purple-500/40',
         emoji: '⚡',
         label: 'Розетки',
         textColor: 'text-purple-600',
-        badgeBg: 'bg-purple-50 text-purple-700 border-purple-200',
+        badgeBg: 'bg-purple-50 text-purple-700 border-purple-100',
       };
     case 'deal':
       return {
-        bg: 'bg-gradient-to-tr from-amber-500 to-rose-500',
-        border: 'border-amber-300',
-        shadow: 'shadow-amber-500/40',
+        bg: 'bg-amber-500',
         emoji: '🔥',
         label: 'Скидка',
         textColor: 'text-amber-600',
-        badgeBg: 'bg-amber-50 text-amber-700 border-amber-200',
+        badgeBg: 'bg-amber-50 text-amber-700 border-amber-100',
       };
     case 'print':
       return {
         bg: 'bg-indigo-600',
-        border: 'border-indigo-300',
-        shadow: 'shadow-indigo-500/40',
         emoji: '🖨️',
         label: 'Печать',
         textColor: 'text-indigo-600',
-        badgeBg: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+        badgeBg: 'bg-indigo-50 text-indigo-700 border-indigo-100',
       };
     default:
       return {
         bg: 'bg-slate-700',
-        border: 'border-slate-300',
-        shadow: 'shadow-slate-500/40',
         emoji: '📍',
         label: 'Точка',
         textColor: 'text-slate-700',
-        badgeBg: 'bg-slate-50 text-slate-700 border-slate-200',
+        badgeBg: 'bg-slate-50 text-slate-700 border-slate-100',
       };
   }
 };
@@ -124,7 +112,7 @@ export const LeafletMapInner: React.FC<LeafletMapInnerProps> = ({
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors',
+        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>',
     }).addTo(map);
 
     const markersLayer = L.layerGroup().addTo(map);
@@ -140,16 +128,16 @@ export const LeafletMapInner: React.FC<LeafletMapInnerProps> = ({
 
       const tempIcon = L.divIcon({
         html: `
-          <div class="relative flex items-center justify-center w-10 h-10 -ml-1 -mt-1">
-            <span class="absolute w-9 h-9 bg-blue-600/30 rounded-full animate-ping"></span>
-            <div class="relative flex items-center justify-center w-7 h-7 bg-blue-600 text-white rounded-2xl border-2 border-white shadow-xl text-xs font-bold">
+          <div class="relative flex items-center justify-center w-8 h-8 -ml-1 -mt-1">
+            <span class="absolute w-7 h-7 bg-blue-600/30 rounded-full animate-ping"></span>
+            <div class="relative flex items-center justify-center w-6 h-6 bg-blue-600 text-white rounded-full border border-white shadow-md text-[11px] font-bold">
               📍
             </div>
           </div>
         `,
         className: 'temp-pin',
-        iconSize: [36, 36],
-        iconAnchor: [18, 18],
+        iconSize: [30, 30],
+        iconAnchor: [15, 15],
       });
 
       const tempM = L.marker([e.latlng.lat, e.latlng.lng], { icon: tempIcon }).addTo(map);
@@ -199,10 +187,10 @@ export const LeafletMapInner: React.FC<LeafletMapInnerProps> = ({
 
     if (userLocation) {
       const userHtml = `
-        <div class="relative flex items-center justify-center w-8 h-8">
-          <span class="absolute w-8 h-8 bg-blue-500/30 rounded-full animate-ping"></span>
-          <span class="relative flex items-center justify-center w-5 h-5 bg-blue-600 text-white rounded-full border-2 border-white shadow-lg">
-            <span class="w-2 h-2 bg-white rounded-full"></span>
+        <div class="relative flex items-center justify-center w-7 h-7">
+          <span class="absolute w-7 h-7 bg-blue-500/30 rounded-full animate-ping"></span>
+          <span class="relative flex items-center justify-center w-4 h-4 bg-blue-600 text-white rounded-full border-2 border-white shadow-md">
+            <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
           </span>
         </div>
       `;
@@ -210,8 +198,8 @@ export const LeafletMapInner: React.FC<LeafletMapInnerProps> = ({
       const userIcon = L.divIcon({
         html: userHtml,
         className: 'user-loc-pin',
-        iconSize: [32, 32],
-        iconAnchor: [16, 16],
+        iconSize: [28, 28],
+        iconAnchor: [14, 14],
       });
 
       const marker = L.marker([userLocation.lat, userLocation.lng], {
@@ -220,7 +208,7 @@ export const LeafletMapInner: React.FC<LeafletMapInnerProps> = ({
       })
         .addTo(mapInstanceRef.current)
         .bindPopup(
-          '<div class="p-2 text-xs font-bold text-slate-800">Вы находитесь здесь 📍</div>'
+          '<div class="p-1.5 text-xs font-bold text-slate-800">Вы здесь 📍</div>'
         );
 
       userMarkerRef.current = marker;
@@ -237,115 +225,62 @@ export const LeafletMapInner: React.FC<LeafletMapInnerProps> = ({
       const config = getCategoryConfig(spot.category);
       const isSelected = selectedSpot?.id === spot.id;
 
+      // Clean, compact, refined pin
       const html = `
         <div class="custom-map-pin flex flex-col items-center cursor-pointer transition-transform duration-200 ${
           isSelected ? 'scale-125 z-50' : 'hover:scale-110'
         }">
-          <div class="w-10 h-10 rounded-2xl ${config.bg} ${config.border} border-2 shadow-md ${
-            config.shadow
-          } flex items-center justify-center text-lg text-white transition-transform">
+          <div class="w-8 h-8 rounded-xl ${config.bg} border-2 border-white shadow-md flex items-center justify-center text-sm text-white">
             ${config.emoji}
           </div>
-          <div class="w-1.5 h-1.5 bg-slate-800 rounded-full mt-0.5 opacity-60"></div>
+          <div class="w-1 h-1 bg-slate-800 rounded-full mt-0.5 opacity-40"></div>
         </div>
       `;
 
       const icon = L.divIcon({
         html,
         className: 'spot-pin',
-        iconSize: [40, 46],
-        iconAnchor: [20, 42],
-        popupAnchor: [0, -42],
+        iconSize: [32, 38],
+        iconAnchor: [16, 34],
+        popupAnchor: [0, -34],
       });
 
       const marker = L.marker([spot.lat, spot.lng], { icon });
 
-      // Create rich popup DOM element
+      // Create rich, lightweight popup
       const popupDiv = document.createElement('div');
-      popupDiv.className = 'w-76 max-w-[85vw] text-slate-800 p-3 font-sans';
+      popupDiv.className = 'w-68 max-w-[80vw] text-slate-800 p-2 font-sans';
 
-      const tagsHtml = (spot.tags || [])
-        .map(
-          (t) =>
-            `<span class="inline-block bg-slate-100 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-md mr-1 mb-1">${t}</span>`
-        )
-        .join('');
-
-      // Price badge formatting
+      // Price badge
       const priceBadge = spot.isFree
-        ? '<span class="bg-emerald-100 text-emerald-800 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-300">Бесплатно</span>'
-        : `<span class="bg-amber-100 text-amber-900 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full border border-amber-300">💰 ${spot.priceInfo || (spot.price ? `${spot.price} ₸` : 'Платно')}</span>`;
+        ? '<span class="bg-emerald-50 text-emerald-700 text-[11px] font-extrabold px-2 py-0.5 rounded-full border border-emerald-200">Бесплатно</span>'
+        : `<span class="bg-amber-50 text-amber-900 text-[11px] font-extrabold px-2 py-0.5 rounded-full border border-amber-200">${spot.priceInfo || (spot.price ? `${spot.price} ₸` : 'Платно')}</span>`;
 
-      // Photo HTML
+      // Compact Photo Preview
       const photoHtml = spot.imageUrl
         ? `
-          <div id="popup-photo-${spot.id}" class="relative w-full h-32 rounded-2xl overflow-hidden mb-2 shadow-xs group cursor-pointer border border-slate-200/80">
-            <img src="${spot.imageUrl}" alt="${spot.title}" class="w-full h-full object-cover transition duration-300 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-              <span class="text-[10px] font-bold text-white bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded-md flex items-center gap-1">
-                <span>📷</span>
-                <span>Нажмите для фото</span>
-              </span>
-              <span class="text-[10px] text-white/90 bg-white/20 backdrop-blur-xs px-1.5 py-0.5 rounded-md font-mono">
-                🔍
-              </span>
-            </div>
+          <div id="popup-photo-${spot.id}" class="relative w-full h-24 rounded-xl overflow-hidden mb-2 shadow-2xs group cursor-pointer border border-slate-100">
+            <img src="${spot.imageUrl}" alt="${spot.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+            <span class="absolute bottom-1.5 left-2 text-[10px] font-bold text-white flex items-center gap-1">
+              📷 Фото
+            </span>
           </div>
         `
         : '';
 
-      const wifiHtml = spot.wifiSpeed
-        ? `<div class="mt-1.5 text-xs text-emerald-700 bg-emerald-50 px-2.5 py-1.5 rounded-xl border border-emerald-200 font-semibold flex items-center justify-between">
-             <span class="flex items-center gap-1"><span>📶</span> Скорость сети:</span>
-             <span class="font-bold font-mono text-emerald-800">${spot.wifiSpeed}</span>
-           </div>`
+      const detailSnippet = spot.wifiSpeed
+        ? `<div class="text-[11px] text-emerald-700 font-semibold flex items-center gap-1"><span>📶</span> Скорость: ${spot.wifiSpeed}</div>`
+        : spot.outletCount
+        ? `<div class="text-[11px] text-purple-700 font-semibold flex items-center gap-1"><span>⚡</span> ${spot.outletCount}</div>`
         : '';
-
-      const wifiPassHtml = spot.wifiPassword
-        ? `<div class="mt-1 text-[11px] text-slate-600 bg-slate-50 px-2.5 py-1 rounded-xl border border-slate-200 flex items-center justify-between">
-             <span class="text-slate-500">Пароль / Доступ:</span>
-             <span class="font-bold text-slate-800 font-mono">${spot.wifiPassword}</span>
-           </div>`
-        : '';
-
-      const outletHtml = spot.outletCount
-        ? `<div class="mt-1.5 text-xs text-purple-700 bg-purple-50 px-2.5 py-1.5 rounded-xl border border-purple-200 font-semibold flex items-center justify-between">
-             <span class="flex items-center gap-1"><span>⚡</span> Розетки:</span>
-             <span class="font-bold text-purple-800">${spot.outletCount}</span>
-           </div>`
-        : '';
-
-      const amenitiesHtml =
-        spot.amenities && spot.amenities.length > 0
-          ? `
-          <div class="flex flex-wrap gap-1 mt-1.5">
-            ${spot.amenities
-              .map(
-                (a) =>
-                  `<span class="text-[10px] font-medium bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded-md border border-blue-100">✓ ${a}</span>`
-              )
-              .join('')}
-          </div>
-        `
-          : '';
-
-      const paymentsHtml =
-        spot.paymentMethods && spot.paymentMethods.length > 0 && !spot.isFree
-          ? `
-          <div class="text-[11px] text-amber-800 bg-amber-50/80 px-2.5 py-1 rounded-xl border border-amber-200 mt-1 flex items-center gap-1">
-            <span class="font-bold">Оплата:</span>
-            <span>${spot.paymentMethods.join(', ')}</span>
-          </div>
-        `
-          : '';
 
       popupDiv.innerHTML = `
-        <div class="space-y-2">
+        <div class="space-y-1.5">
           ${photoHtml}
 
-          <div class="flex items-center justify-between gap-2">
-            <span class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-md border ${
+          <div class="flex items-center justify-between gap-1.5">
+            <span class="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-md border ${
               config.badgeBg
             }">
               <span>${config.emoji}</span>
@@ -355,46 +290,22 @@ export const LeafletMapInner: React.FC<LeafletMapInnerProps> = ({
           </div>
 
           <div>
-            <h4 class="font-extrabold text-sm text-slate-900 leading-snug">${
+            <h4 class="font-bold text-xs text-slate-900 leading-snug">${
               spot.title
             }</h4>
-            <p class="text-xs text-slate-500 mt-0.5 flex items-start gap-1">
-              <span>📍</span>
-              <span>${spot.address}</span>
-            </p>
+            <p class="text-[11px] text-slate-500 truncate mt-0.5">${spot.address}</p>
           </div>
 
-          ${wifiHtml}
-          ${wifiPassHtml}
-          ${outletHtml}
-          ${amenitiesHtml}
-          ${paymentsHtml}
+          ${detailSnippet}
 
-          <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-            ${spot.description}
-          </p>
-
-          ${
-            spot.hours
-              ? `<div class="text-[11px] text-slate-500 flex items-center gap-1 font-medium">
-                   <span>🕒</span>
-                   <span>${spot.hours}</span>
-                 </div>`
-              : ''
-          }
-
-          <div class="pt-0.5 flex flex-wrap">
-            ${tagsHtml}
-          </div>
-
-          <div class="pt-2 border-t border-slate-100 grid grid-cols-3 gap-1.5">
+          <div class="pt-1.5 border-t border-slate-100 grid grid-cols-3 gap-1">
             <a 
               href="https://2gis.kz/almaty/search/${encodeURIComponent(
                 spot.title + ' ' + spot.address
               )}" 
               target="_blank" 
               rel="noopener noreferrer"
-              class="text-center bg-slate-100 hover:bg-slate-200 text-slate-800 py-1.5 px-1 rounded-xl text-[11px] font-bold transition"
+              class="text-center bg-slate-100 hover:bg-slate-200 text-slate-700 py-1 rounded-lg text-[10px] font-bold transition"
             >
               2GIS ↗
             </a>
@@ -402,7 +313,7 @@ export const LeafletMapInner: React.FC<LeafletMapInnerProps> = ({
               href="https://yandex.kz/maps/?rtext=~${spot.lat}%2C${spot.lng}" 
               target="_blank" 
               rel="noopener noreferrer"
-              class="text-center bg-amber-50 hover:bg-amber-100 text-amber-800 py-1.5 px-1 rounded-xl text-[11px] font-bold transition"
+              class="text-center bg-amber-50 hover:bg-amber-100 text-amber-800 py-1 rounded-lg text-[10px] font-bold transition"
             >
               Яндекс ↗
             </a>
@@ -412,7 +323,7 @@ export const LeafletMapInner: React.FC<LeafletMapInnerProps> = ({
               },${spot.lng}" 
               target="_blank" 
               rel="noopener noreferrer"
-              class="text-center bg-blue-50 hover:bg-blue-100 text-blue-700 py-1.5 px-1 rounded-xl text-[11px] font-bold transition"
+              class="text-center bg-blue-50 hover:bg-blue-100 text-blue-700 py-1 rounded-lg text-[10px] font-bold transition"
             >
               Google ↗
             </a>
@@ -420,16 +331,15 @@ export const LeafletMapInner: React.FC<LeafletMapInnerProps> = ({
 
           ${
             spot.offerId
-              ? `<button id="popup-offer-btn-${spot.id}" class="w-full mt-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs py-2 px-3 rounded-xl transition shadow-xs flex items-center justify-center gap-1.5">
+              ? `<button id="popup-offer-btn-${spot.id}" class="w-full mt-1 bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] py-1.5 px-2 rounded-lg transition flex items-center justify-center gap-1">
                    <span>🔥</span>
-                   <span>Получить QR со скидкой</span>
+                   <span>Получить QR</span>
                  </button>`
               : ''
           }
         </div>
       `;
 
-      // Handle QR button click if linked to a StudCity offer
       if (spot.offerId) {
         const matchingOffer = offers.find((o) => o.id === spot.offerId);
         if (matchingOffer) {
@@ -440,7 +350,6 @@ export const LeafletMapInner: React.FC<LeafletMapInnerProps> = ({
         }
       }
 
-      // Handle Photo click for full view
       if (spot.imageUrl && onPhotoClick) {
         const photoEl = popupDiv.querySelector(`#popup-photo-${spot.id}`);
         photoEl?.addEventListener('click', () => {
