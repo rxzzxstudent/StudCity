@@ -1,5 +1,29 @@
 export type Role = 'student' | 'cashier';
 
+export type StudentTab = 'offers' | 'map';
+
+export type MapSpotCategory = 'toilet' | 'wifi' | 'outlet' | 'deal' | 'print';
+
+export interface MapSpot {
+  id: string;
+  title: string;
+  category: MapSpotCategory;
+  categoryLabel: string;
+  lat: number;
+  lng: number;
+  address: string;
+  isFree: boolean;
+  priceInfo?: string;
+  hours?: string;
+  description: string;
+  wifiSpeed?: string;
+  outletCount?: string;
+  dealDiscount?: number;
+  offerId?: string;
+  tags?: string[];
+  isUserAdded?: boolean;
+}
+
 export type Category = 'all' | 'coffee' | 'food' | 'print' | 'coworking';
 
 export interface VenueOffer {

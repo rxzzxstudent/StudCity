@@ -5,17 +5,22 @@ import { AppProvider, useApp } from '@/context/AppContext';
 import { Header } from '@/components/Header';
 import { StudentView } from '@/components/student/StudentView';
 import { CashierView } from '@/components/cashier/CashierView';
+import { UnifiedCityMap } from '@/components/map/UnifiedCityMap';
 import { Sparkles, Heart } from 'lucide-react';
 
 function AppContent() {
-  const { role } = useApp();
+  const { role, studentTab } = useApp();
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
       <Header />
       
       <main className="flex-1">
-        {role === 'student' ? <StudentView /> : <CashierView />}
+        {role === 'student' ? (
+          studentTab === 'offers' ? <StudentView /> : <UnifiedCityMap />
+        ) : (
+          <CashierView />
+        )}
       </main>
 
       <footer className="py-6 border-t border-slate-200/80 bg-white text-center text-xs text-slate-500">

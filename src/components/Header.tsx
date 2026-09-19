@@ -8,6 +8,8 @@ export const Header: React.FC = () => {
   const { 
     role, 
     setRole, 
+    studentTab,
+    setStudentTab,
     viewMode, 
     setViewMode, 
     resetDemoData,
@@ -18,7 +20,7 @@ export const Header: React.FC = () => {
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-2xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 gap-4">
+        <div className="flex items-center justify-between h-16 gap-3">
           
           {/* Logo & Brand */}
           <div className="flex items-center gap-3 shrink-0">
@@ -35,26 +37,52 @@ export const Header: React.FC = () => {
             </div>
           </div>
 
-          {/* Search Bar in Header (for Student View on Laptop) */}
+          {/* Student Sub-navigation: Offers vs Map */}
           {role === 'student' && (
-            <div className="hidden md:flex items-center flex-1 max-w-md mx-4">
+            <div className="flex items-center bg-slate-100/90 p-1 rounded-2xl border border-slate-200/80">
+              <button
+                onClick={() => setStudentTab('offers')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 ${
+                  studentTab === 'offers'
+                    ? 'bg-white text-blue-600 shadow-xs border border-slate-200/60'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/40'
+                }`}
+              >
+                <span>🔥</span>
+                <span className="hidden sm:inline">Скидки и акции</span>
+                <span className="sm:hidden">Акции</span>
+              </button>
+
+              <button
+                onClick={() => setStudentTab('map')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 ${
+                  studentTab === 'map'
+                    ? 'bg-white text-blue-600 shadow-xs border border-slate-200/60'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/40'
+                }`}
+              >
+                <span>🗺️</span>
+                <span className="hidden md:inline">Карта города (OSM)</span>
+                <span className="md:hidden">Карта</span>
+                <span className="bg-blue-100 text-blue-800 text-[9px] font-extrabold px-1.5 py-0.2 rounded-full hidden sm:inline-block">
+                  Туалеты
+                </span>
+              </button>
+            </div>
+          )}
+
+          {/* Search Bar in Header (for Student View on Laptop when on offers tab) */}
+          {role === 'student' && studentTab === 'offers' && (
+            <div className="hidden lg:flex items-center flex-1 max-w-xs mx-2">
               <div className="relative w-full">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Поиск заведения, кофе, комбо-ланча..."
-                  className="w-full bg-slate-100/90 hover:bg-slate-100 focus:bg-white text-xs text-slate-900 pl-10 pr-4 py-2 rounded-xl border border-transparent focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-hidden transition"
+                  placeholder="Поиск акций, кофе..."
+                  className="w-full bg-slate-100/90 hover:bg-slate-100 focus:bg-white text-xs text-slate-900 pl-9 pr-4 py-1.5 rounded-xl border border-transparent focus:border-blue-500 outline-hidden transition"
                 />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs font-bold"
-                  >
-                    ✕
-                  </button>
-                )}
               </div>
             </div>
           )}

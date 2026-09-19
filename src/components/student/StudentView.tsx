@@ -52,6 +52,7 @@ export const StudentView: React.FC = () => {
     offers,
     openQrModal,
     viewMode,
+    setStudentTab,
   } = useApp();
 
   const [clusterDropdownOpen, setClusterDropdownOpen] = useState(false);
@@ -137,6 +138,34 @@ export const StudentView: React.FC = () => {
         <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
           Динамические студенческие скидки до <strong className="text-blue-600 font-bold">-50%</strong> в непиковые часы в любимых кофейнях, донерных, копицентрах и коворкингах около вашего кампуса.
         </p>
+      </div>
+
+      {/* 1.5 Quick City Amenities Map Callout */}
+      <div 
+        onClick={() => setStudentTab('map')}
+        className="bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 rounded-3xl p-4 sm:p-5 text-white shadow-md mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 cursor-pointer hover:shadow-lg transition group border border-blue-400/30"
+      >
+        <div className="flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center text-xl shrink-0">
+            🚽
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-extrabold text-sm sm:text-base">Интерактивная карта Алматы</span>
+              <span className="bg-white/20 text-[10px] font-extrabold px-2 py-0.5 rounded-full">OpenStreetMap</span>
+            </div>
+            <p className="text-xs text-blue-100 mt-0.5">
+              Общественные туалеты, открытый Wi-Fi, розетки для учебы и партнерские точки со скидками
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={(e) => { e.stopPropagation(); setStudentTab('map'); }}
+          className="bg-white text-blue-700 hover:bg-blue-50 font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-xs flex items-center gap-1.5 shrink-0"
+        >
+          <span>Открыть карту удобств</span>
+          <span className="group-hover:translate-x-1 transition-transform">→</span>
+        </button>
       </div>
 
       {/* 2. Compact Search & Filter Controls Bar */}
@@ -274,6 +303,14 @@ export const StudentView: React.FC = () => {
               </button>
             );
           })}
+
+          <button
+            onClick={() => setStudentTab('map')}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 transition shrink-0 ml-auto"
+          >
+            <span>🚽</span>
+            <span>Карта туалетов & удобств (OSM) ↗</span>
+          </button>
         </div>
 
       </div>

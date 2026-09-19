@@ -1,13 +1,16 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Role, Category, VenueOffer, StudentCode, RedemptionLog, B2BMetrics } from '@/types';
+import { Role, Category, VenueOffer, StudentCode, RedemptionLog, B2BMetrics, StudentTab, MapSpot, MapSpotCategory } from '@/types';
+import { INITIAL_MAP_SPOTS } from '@/components/map/spotsData';
 
 export type SortOption = 'popular' | 'discount' | 'distance' | 'expiring';
 
 interface AppContextType {
   role: Role;
   setRole: (role: Role) => void;
+  studentTab: StudentTab;
+  setStudentTab: (tab: StudentTab) => void;
   viewMode: 'mobile-frame' | 'responsive';
   setViewMode: (mode: 'mobile-frame' | 'responsive') => void;
   selectedCategory: Category;
@@ -19,6 +22,13 @@ interface AppContextType {
   sortBy: SortOption;
   setSortBy: (sort: SortOption) => void;
   offers: VenueOffer[];
+  mapSpots: MapSpot[];
+  addMapSpot: (spot: Omit<MapSpot, 'id'>) => void;
+  activeMapFilters: MapSpotCategory[];
+  toggleMapFilter: (cat: MapSpotCategory) => void;
+  setAllMapFilters: (cats: MapSpotCategory[]) => void;
+  selectedMapSpot: MapSpot | null;
+  setSelectedMapSpot: (spot: MapSpot | null) => void;
   activeStudentCode: StudentCode | null;
   activeOfferForQr: VenueOffer | null;
   openQrModal: (offer: VenueOffer) => void;
@@ -200,11 +210,68 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [role, setRole] = useState<Role>('student');
+  const [studentTab, setStudentTab] = useState<StudentTab>('offers');
   const [viewMode, setViewMode] = useState<'mobile-frame' | 'responsive'>('responsive');
   const [selectedCategory, setSelectedCategory] = useState<Category>('all');
   const [selectedCluster, setSelectedCluster] = useState<string>('Кластер Сатпаева — Байтурсынова');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState<SortOption>('popular');
+
+  // Map state
+  const [mapSpots, setMapSpots] = useState<MapSpot[]>(INITIAL_MAP_SPOTS);
+  const [activeMapFilters, setActiveMapFilters] = useState<MapSpotCategory[]>([
+    'toilet',
+    'wifi',
+    'outlet',
+    'deal',
+    'print',
+  ]);
+  const [selectedMapSpot, setSelectedMapSpot] = useState<MapSpot | null>(null);
+
+  // Load user spots from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('studcity_user_spots');
+        if (saved) {
+          const parsed: MapSpot[] = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setMapSpots([...INITIAL_MAP_SPOTS, ...parsed]);
+          }
+        }
+      } catch {
+        // ignore JSON parse error
+      }
+    }
+  }, []);
+
+  const addMapSpot = (spotData: Omit<MapSpot, 'id'>) => {
+    const newSpot: MapSpot = {
+      ...spotData,
+      id: `user-spot-${Date.now()}`,
+      isUserAdded: true,
+    };
+    setMapSpots((prev) => {
+      const updated = [newSpot, ...prev];
+      if (typeof window !== 'undefined') {
+        const userAddedOnly = updated.filter((s) => s.isUserAdded);
+        localStorage.setItem('studcity_user_spots', JSON.stringify(userAddedOnly));
+      }
+      return updated;
+    });
+  };
+
+  const toggleMapFilter = (category: MapSpotCategory) => {
+    setActiveMapFilters((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
+    );
+  };
+
+  const setAllMapFilters = (categories: MapSpotCategory[]) => {
+    setActiveMapFilters(categories);
+  };
 
   const [urboHappyHoursActive, setUrboHappyHoursActive] = useState<boolean>(true);
   const [offers, setOffers] = useState<VenueOffer[]>(INITIAL_OFFERS);
@@ -378,6 +445,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const resetDemoData = () => {
     setOffers(INITIAL_OFFERS);
+    setMapSpots(INITIAL_MAP_SPOTS);
+    setActiveMapFilters(['toilet', 'wifi', 'outlet', 'deal', 'print']);
+    setSelectedMapSpot(null);
+    setStudentTab('offers');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('studcity_user_spots');
+    }
     setUrboHappyHoursActive(true);
     setB2bMetrics(INITIAL_METRICS);
     setRedemptionLogs(INITIAL_LOGS);
@@ -393,6 +467,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       value={{
         role,
         setRole,
+        studentTab,
+        setStudentTab,
         viewMode,
         setViewMode,
         selectedCategory,
@@ -404,6 +480,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         sortBy,
         setSortBy,
         offers,
+        mapSpots,
+        addMapSpot,
+        activeMapFilters,
+        toggleMapFilter,
+        setAllMapFilters,
+        selectedMapSpot,
+        setSelectedMapSpot,
         activeStudentCode,
         activeOfferForQr,
         openQrModal,
