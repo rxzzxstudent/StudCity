@@ -13,13 +13,18 @@ export interface MapSpot {
   lng: number;
   address: string;
   isFree: boolean;
+  price?: number; // Numeric price in ₸ (0 if free)
   priceInfo?: string;
   hours?: string;
   description: string;
+  imageUrl?: string;
   wifiSpeed?: string;
+  wifiPassword?: string;
   outletCount?: string;
   dealDiscount?: number;
   offerId?: string;
+  amenities?: string[];
+  paymentMethods?: string[];
   tags?: string[];
   isUserAdded?: boolean;
 }

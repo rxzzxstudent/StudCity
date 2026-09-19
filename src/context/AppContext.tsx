@@ -24,6 +24,7 @@ interface AppContextType {
   offers: VenueOffer[];
   mapSpots: MapSpot[];
   addMapSpot: (spot: Omit<MapSpot, 'id'>) => void;
+  deleteMapSpot: (id: string) => void;
   activeMapFilters: MapSpotCategory[];
   toggleMapFilter: (cat: MapSpotCategory) => void;
   setAllMapFilters: (cats: MapSpotCategory[]) => void;
@@ -261,6 +262,20 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  const deleteMapSpot = (id: string) => {
+    setMapSpots((prev) => {
+      const updated = prev.filter((s) => s.id !== id);
+      if (typeof window !== 'undefined') {
+        const userAddedOnly = updated.filter((s) => s.isUserAdded);
+        localStorage.setItem('studcity_user_spots', JSON.stringify(userAddedOnly));
+      }
+      return updated;
+    });
+    if (selectedMapSpot?.id === id) {
+      setSelectedMapSpot(null);
+    }
+  };
+
   const toggleMapFilter = (category: MapSpotCategory) => {
     setActiveMapFilters((prev) =>
       prev.includes(category)
@@ -482,6 +497,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         offers,
         mapSpots,
         addMapSpot,
+        deleteMapSpot,
         activeMapFilters,
         toggleMapFilter,
         setAllMapFilters,
