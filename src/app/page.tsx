@@ -12,10 +12,10 @@ function AppContent() {
   const { role, studentTab } = useApp();
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
+    <div className="min-h-screen flex flex-col bg-slate-50 w-full max-w-full overflow-x-hidden">
       <Header />
       
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-full">
         {role === 'student' ? (
           studentTab === 'offers' ? <StudentView /> : <UnifiedCityMap />
         ) : (
