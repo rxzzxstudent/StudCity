@@ -116,73 +116,34 @@ export const StudentView: React.FC = () => {
   };
 
   return (
-    <div className={`mx-auto transition-all duration-300 ${
-      viewMode === 'mobile-frame' 
-        ? 'max-w-md my-6 p-4 bg-slate-900/5 rounded-[44px] border-8 border-slate-800 shadow-2xl' 
-        : 'max-w-7xl px-4 sm:px-6 lg:px-8 py-8'
-    }`}>
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 transition-all duration-300">
       
-      {/* 1. Hero & Header Banner (Lablab-style modern intro) */}
-      <div className="text-center max-w-3xl mx-auto mb-8 animate-fade-in">
-        <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200/80 px-3.5 py-1.5 rounded-full text-xs font-bold text-blue-700 mb-3 shadow-2xs">
-          <GraduationCap className="w-4 h-4 text-blue-600" />
-          <span>Студент: КазНУ им. аль-Фараби</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-          <span className="text-emerald-700 font-semibold">Подтвержден</span>
-        </div>
-
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+      {/* 1. Hero & Header Banner */}
+      <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 animate-fade-in">
+        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
           Счастливые часы StudCity
         </h1>
         
-        <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+        <p className="mt-2.5 sm:mt-3 text-xs sm:text-base text-slate-600 leading-relaxed font-normal px-2">
           Динамические студенческие скидки до <strong className="text-blue-600 font-bold">-50%</strong> в непиковые часы в любимых кофейнях, донерных, копицентрах и коворкингах около вашего кампуса.
         </p>
       </div>
 
-      {/* 1.5 Quick City Amenities Map Callout */}
-      <div 
-        onClick={() => setStudentTab('map')}
-        className="bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 rounded-3xl p-4 sm:p-5 text-white shadow-md mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 cursor-pointer hover:shadow-lg transition group border border-blue-400/30"
-      >
-        <div className="flex items-center gap-3.5">
-          <div className="w-11 h-11 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center text-xl shrink-0">
-            🚽
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-sm sm:text-base">Интерактивная карта Алматы</span>
-              <span className="bg-white/20 text-[10px] font-extrabold px-2 py-0.5 rounded-full">OpenStreetMap</span>
-            </div>
-            <p className="text-xs text-blue-100 mt-0.5">
-              Общественные туалеты, открытый Wi-Fi, розетки для учебы и партнерские точки со скидками
-            </p>
-          </div>
-        </div>
-        <button
-          onClick={(e) => { e.stopPropagation(); setStudentTab('map'); }}
-          className="bg-white text-blue-700 hover:bg-blue-50 font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-xs flex items-center gap-1.5 shrink-0"
-        >
-          <span>Открыть карту удобств</span>
-          <span className="group-hover:translate-x-1 transition-transform">→</span>
-        </button>
-      </div>
-
       {/* 2. Compact Search & Filter Controls Bar */}
-      <div className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/90 shadow-sm mb-8 space-y-4">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 border border-slate-200/90 shadow-sm mb-6 sm:mb-8 space-y-3 sm:space-y-4">
         
         {/* Top Controls Row: Search Input + Cluster + Sort */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-2 sm:gap-3">
           
           {/* Search bar */}
-          <div className="md:col-span-6 relative">
+          <div className="sm:col-span-2 md:col-span-6 relative">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Поиск заведения, капучино, донера, печати..."
-              className="w-full bg-slate-50 hover:bg-slate-100/70 focus:bg-white text-xs sm:text-sm text-slate-900 pl-10 pr-4 py-2.5 rounded-2xl border border-slate-200 focus:border-blue-600 outline-hidden transition"
+              className="w-full bg-slate-50 hover:bg-slate-100/70 focus:bg-white text-xs sm:text-sm text-slate-900 pl-10 pr-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl border border-slate-200 focus:border-blue-600 outline-hidden transition"
             />
             {searchQuery && (
               <button
@@ -195,13 +156,13 @@ export const StudentView: React.FC = () => {
           </div>
 
           {/* Cluster Dropdown */}
-          <div className="md:col-span-4 relative">
+          <div className="sm:col-span-1 md:col-span-4 relative">
             <button
               onClick={() => {
                 setClusterDropdownOpen(!clusterDropdownOpen);
                 setSortDropdownOpen(false);
               }}
-              className="w-full flex items-center justify-between bg-slate-50 hover:bg-slate-100/80 border border-slate-200 text-slate-800 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition"
+              className="w-full flex items-center justify-between bg-slate-50 hover:bg-slate-100/80 border border-slate-200 text-slate-800 px-3 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold transition"
             >
               <div className="flex items-center gap-2 truncate">
                 <MapPin className="w-4 h-4 text-blue-600 shrink-0" />
@@ -223,8 +184,8 @@ export const StudentView: React.FC = () => {
                       selectedCluster === cl ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-slate-700 hover:bg-slate-50'
                     }`}
                   >
-                    <span>{cl}</span>
-                    {selectedCluster === cl && <CheckCircle2 className="w-4 h-4 text-blue-600" />}
+                    <span className="truncate">{cl}</span>
+                    {selectedCluster === cl && <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 ml-1" />}
                   </button>
                 ))}
               </div>
@@ -232,13 +193,13 @@ export const StudentView: React.FC = () => {
           </div>
 
           {/* Sorting Dropdown */}
-          <div className="md:col-span-2 relative">
+          <div className="sm:col-span-1 md:col-span-2 relative">
             <button
               onClick={() => {
                 setSortDropdownOpen(!sortDropdownOpen);
                 setClusterDropdownOpen(false);
               }}
-              className="w-full flex items-center justify-between bg-slate-50 hover:bg-slate-100/80 border border-slate-200 text-slate-800 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition"
+              className="w-full flex items-center justify-between bg-slate-50 hover:bg-slate-100/80 border border-slate-200 text-slate-800 px-3 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold transition"
             >
               <div className="flex items-center gap-1.5 truncate">
                 <ArrowUpDown className="w-3.5 h-3.5 text-slate-500 shrink-0" />
@@ -285,14 +246,14 @@ export const StudentView: React.FC = () => {
         </div>
 
         {/* Category Pills Row */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-1">
+        <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar pt-1 pb-0.5">
           {CATEGORIES.map((cat) => {
             const isSelected = selectedCategory === cat.id;
             return (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 shrink-0 ${
+                className={`flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 shrink-0 ${
                   isSelected
                     ? 'bg-blue-600 text-white shadow-xs scale-[1.02]'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80 hover:text-slate-900'
@@ -303,14 +264,6 @@ export const StudentView: React.FC = () => {
               </button>
             );
           })}
-
-          <button
-            onClick={() => setStudentTab('map')}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 transition shrink-0 ml-auto"
-          >
-            <span>🚽</span>
-            <span>Карта туалетов & удобств (OSM) ↗</span>
-          </button>
         </div>
 
       </div>

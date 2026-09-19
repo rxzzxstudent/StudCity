@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useApp } from '@/context/AppContext';
-import { GraduationCap, Store, Sparkles, Smartphone, Monitor, RotateCcw, CheckCircle2, Search } from 'lucide-react';
+import { GraduationCap, Store, Sparkles } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const { 
@@ -10,89 +10,58 @@ export const Header: React.FC = () => {
     setRole, 
     studentTab,
     setStudentTab,
-    viewMode, 
-    setViewMode, 
-    resetDemoData,
-    searchQuery,
-    setSearchQuery,
   } = useApp();
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-2xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 gap-3">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14 sm:h-16 gap-2 sm:gap-4">
           
           {/* Logo & Brand */}
-          <div className="flex items-center gap-3 shrink-0">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-blue-500 to-sky-400 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-              <Sparkles className="w-5 h-5" />
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-blue-500 to-sky-400 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <div className="flex items-center gap-2">
-              <span className="font-black text-xl tracking-tight text-slate-900">
-                Stud<span className="text-blue-600">City</span>
-              </span>
-              <span className="hidden sm:inline-flex bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-blue-200">
-                MVP Almaty
-              </span>
-            </div>
+            <span className="font-black text-lg sm:text-xl tracking-tight text-slate-900">
+              Stud<span className="text-blue-600">City</span>
+            </span>
           </div>
 
           {/* Student Sub-navigation: Offers vs Map */}
           {role === 'student' && (
-            <div className="flex items-center bg-slate-100/90 p-1 rounded-2xl border border-slate-200/80">
+            <div className="flex items-center bg-slate-100/90 p-0.5 sm:p-1 rounded-xl sm:rounded-2xl border border-slate-200/80">
               <button
                 onClick={() => setStudentTab('offers')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 ${
+                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-3.5 sm:py-1.5 rounded-lg sm:rounded-xl text-xs font-bold transition-all duration-200 ${
                   studentTab === 'offers'
                     ? 'bg-white text-blue-600 shadow-xs border border-slate-200/60'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/40'
                 }`}
               >
                 <span>🔥</span>
-                <span className="hidden sm:inline">Скидки и акции</span>
-                <span className="sm:hidden">Акции</span>
+                <span>Скидки</span>
               </button>
 
               <button
                 onClick={() => setStudentTab('map')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 ${
+                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-3.5 sm:py-1.5 rounded-lg sm:rounded-xl text-xs font-bold transition-all duration-200 ${
                   studentTab === 'map'
                     ? 'bg-white text-blue-600 shadow-xs border border-slate-200/60'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/40'
                 }`}
               >
                 <span>🗺️</span>
-                <span className="hidden md:inline">Карта города (OSM)</span>
-                <span className="md:hidden">Карта</span>
-                <span className="bg-blue-100 text-blue-800 text-[9px] font-extrabold px-1.5 py-0.2 rounded-full hidden sm:inline-block">
-                  Туалеты
-                </span>
+                <span>Карта города</span>
               </button>
             </div>
           )}
 
-          {/* Search Bar in Header (for Student View on Laptop when on offers tab) */}
-          {role === 'student' && studentTab === 'offers' && (
-            <div className="hidden lg:flex items-center flex-1 max-w-xs mx-2">
-              <div className="relative w-full">
-                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Поиск акций, кофе..."
-                  className="w-full bg-slate-100/90 hover:bg-slate-100 focus:bg-white text-xs text-slate-900 pl-9 pr-4 py-1.5 rounded-xl border border-transparent focus:border-blue-500 outline-hidden transition"
-                />
-              </div>
-            </div>
-          )}
-
           {/* Center / Right: Main Role Switcher */}
-          <div className="flex items-center gap-2.5">
-            <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200/80">
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center bg-slate-100 p-0.5 sm:p-1 rounded-xl border border-slate-200/80">
               <button
                 onClick={() => setRole('student')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 ${
+                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg text-xs font-bold transition-all duration-200 ${
                   role === 'student'
                     ? 'bg-white text-blue-600 shadow-xs border border-slate-200/70'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/40'
@@ -104,7 +73,7 @@ export const Header: React.FC = () => {
 
               <button
                 onClick={() => setRole('cashier')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 ${
+                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg text-xs font-bold transition-all duration-200 ${
                   role === 'cashier'
                     ? 'bg-white text-blue-600 shadow-xs border border-slate-200/70'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/40'
@@ -115,44 +84,6 @@ export const Header: React.FC = () => {
                 <span className="sm:hidden">Кассир</span>
               </button>
             </div>
-
-            {/* Student Verified Mini-Badge */}
-            {role === 'student' && (
-              <div className="hidden xl:flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-medium px-2.5 py-1.5 rounded-xl">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                <span>КазНУ ID</span>
-              </div>
-            )}
-
-            {/* Desktop View Mode Toggle (Mobile frame / Full) */}
-            {role === 'student' && (
-              <button
-                onClick={() => setViewMode(viewMode === 'responsive' ? 'mobile-frame' : 'responsive')}
-                title={viewMode === 'responsive' ? 'Показать в рамке смартфона' : 'Полноэкранный вид (Laptop Grid)'}
-                className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 rounded-xl transition"
-              >
-                {viewMode === 'responsive' ? (
-                  <>
-                    <Smartphone className="w-3.5 h-3.5 text-blue-600" />
-                    <span>Mobile Frame</span>
-                  </>
-                ) : (
-                  <>
-                    <Monitor className="w-3.5 h-3.5 text-blue-600" />
-                    <span>Laptop Grid</span>
-                  </>
-                )}
-              </button>
-            )}
-
-            {/* Reset Button */}
-            <button
-              onClick={resetDemoData}
-              title="Сбросить демо-данные"
-              className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-            </button>
           </div>
 
         </div>

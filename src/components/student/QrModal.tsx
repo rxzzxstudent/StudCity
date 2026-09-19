@@ -131,7 +131,7 @@ export const QrModal: React.FC = () => {
           {/* Student details verified */}
           <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-center gap-1.5 text-[11px] text-emerald-600 font-medium">
             <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>КазНУ им. аль-Фараби (ID подтвержден)</span>
+            <span>Студенческий ID подтвержден</span>
           </div>
 
           {/* Quick Demo Action to Jump to Cashier */}
