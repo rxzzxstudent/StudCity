@@ -513,6 +513,26 @@ export const INITIAL_MAP_SPOTS: MapSpot[] = [
     paymentMethods: ['Kaspi QR', 'Карта', 'QR StudCity'],
     tags: ['Coffee Moon', 'Лимонад в подарок', 'Манаса 51', 'StudCity Партнер'],
   },
+  {
+    id: 'deal-spirit-coffee',
+    title: 'Spirit coffee • Скидка -15%',
+    category: 'deal',
+    categoryLabel: 'Скидка StudCity',
+    lat: 43.2135,
+    lng: 76.9020,
+    address: 'ул. Жарокова, 289',
+    isFree: false,
+    price: 1360,
+    priceInfo: 'Напитки от 1 360 ₸ (скидка 15%)',
+    dealDiscount: 15,
+    offerId: 'spirit-coffee',
+    hours: '08:00 – 22:00',
+    description: 'Spirit coffee — 15% скидка на все напитки для студентов StudCity. Свежий спешелти кофе, чай и сезонные напитки.',
+    imageUrl: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80',
+    amenities: ['Свежий кофе', 'Wi-Fi', 'Уютная атмосфера', 'Takeaway'],
+    paymentMethods: ['Kaspi QR', 'Карта', 'QR StudCity'],
+    tags: ['Spirit coffee', 'Кофе', 'Напитки', 'Жарокова 289', 'Скидка -15%'],
+  },
 
   // --- КОПИЦЕНТРЫ / ПЕЧАТЬ (PRINT) ---
   {

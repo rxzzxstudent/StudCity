@@ -162,6 +162,27 @@ const INITIAL_OFFERS: VenueOffer[] = [
     phone: '+7 776 712 1998',
     badge: '@aigerim_saduakasovna',
   },
+  {
+    id: 'spirit-coffee',
+    name: 'Spirit coffee',
+    category: 'coffee',
+    categoryLabel: 'Кофе и напитки',
+    address: 'ул. Жарокова, 289',
+    distance: 'Бостандыкский р-н (Жарокова)',
+    cluster: 'Кампус КазНУ (ГУК)',
+    title: 'Скидка 15% на все напитки',
+    description: 'Spirit coffee на Жарокова 289 — уютная кофейня со свежеобжаренным спешелти кофе. Скидка 15% на все кофейные, сезонные и авторские напитки по студенческому QR StudCity.',
+    originalPrice: 1600,
+    discountedPrice: 1360,
+    discountPercent: 15,
+    happyHoursActive: true,
+    happyHoursEnd: '22:00',
+    remainingSeconds: 21600,
+    image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80',
+    iconName: 'Coffee',
+    isControlledByCashier: false,
+    badge: 'Жарокова, 289 • Скидка 15%',
+  },
 ];
 
 const INITIAL_LOGS: RedemptionLog[] = [
